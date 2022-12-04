@@ -14,17 +14,6 @@ import java.util.Random;
 
 import com.game.end.EndGame;
 
-import javafx.application.Platform;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-import java.util.Random;
-
 class GameScene {
     private static int HEIGHT = 700;
     private static int n = 4;
@@ -34,6 +23,7 @@ class GameScene {
     private Cell[][] cells = new Cell[n][n];
     private Group root;
     private long score = 0;
+    private boolean combined = false;
 
     static void setN(int number) {
         n = number;
@@ -215,11 +205,20 @@ class GameScene {
     }
 
     private void moveHorizontally(int i, int j, int des, int sign) {
+    	combined=false;
         if (isValidDesH(i, j, des, sign)) {
             cells[i][j].adder(cells[i][des + sign]);
             cells[i][des].setModify(true);
+            combined = true;
+            System.out.println("what is getNumber(): "+cells[i][des+sign].getNumber());
+            //add score
+            score +=cells[i][des + sign].getNumber();
+            System.out.println("Which cell "+"i "+i+(des+sign));
+            System.out.println(i+" "+"in moveHorizontally is Valid");
         } else if (des != j) {
             cells[i][j].changeCell(cells[i][des]);
+            System.out.println(i+" "+"in else if moveHorizontally");
+            System.out.println("Combined "+combined);
         }
     }
 
@@ -233,21 +232,32 @@ class GameScene {
     }
 
     private void moveVertically(int i, int j, int des, int sign) {
+    	combined=false;
         if (isValidDesV(i, j, des, sign)) {
             cells[i][j].adder(cells[des + sign][j]);
             cells[des][j].setModify(true);
+            score +=cells[des + sign][j].getNumber();
+            combined = true;
+            System.out.println("Which cell "+(des+sign)+"j "+j);
+            System.out.println(i+" "+"in moveVertically isValid");
         } else if (des != i) {
             cells[i][j].changeCell(cells[des][j]);
+            System.out.println(i+" "+"in else if moveVertically");
+            System.out.println("Combined"+combined);
         }
     }
 
+    //Check if neighboring cells have the same value
     private boolean haveSameNumberNearly(int i, int j) {
         if (i < n - 1 && j < n - 1) {
-            if (cells[i + 1][j].getNumber() == cells[i][j].getNumber())
-                return true;
-            if (cells[i][j + 1].getNumber() == cells[i][j].getNumber())
-                return true;
+            if (cells[i + 1][j].getNumber() == cells[i][j].getNumber()) {
+            	System.out.println(i+" "+cells[i + 1][j].getNumber()+ " "+"in haveSameNumberNearly true");
+                return true;}
+            if (cells[i][j + 1].getNumber() == cells[i][j].getNumber()) {
+            	System.out.println(i+"in haveSameNumberNearly true");
+                return true;}
         }
+        System.out.println(i+"in haveSameNumberNearly false");
         return false;
     }
 
@@ -255,6 +265,7 @@ class GameScene {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (haveSameNumberNearly(i, j)) {
+                	System.out.println(j+"in canNotMove");
                     return false;
                 }
             }
@@ -262,14 +273,18 @@ class GameScene {
         return true;
     }
 
-    private void sumCellNumbersToScore() {
+   /* private void sumCellNumbersToScore() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                score += cells[i][j].getNumber();
+            	if(combined==true) {
+            		System.out.println("Getmodify"+combined);
+            		score += cells[i][j].getNumber();
+            		System.out.println("Score:"+score);
+            	}
             }
         }
     }
-
+*/
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
         for (int i = 0; i < n; i++) {
@@ -297,28 +312,32 @@ class GameScene {
         gameScene.addEventHandler(KeyEvent.KEY_PRESSED, key ->{
                 Platform.runLater(() -> {
                     int haveEmptyCell;
-                    if (key.getCode() == KeyCode.DOWN) {
-                        GameScene.this.moveDown();
-                    } else if (key.getCode() == KeyCode.UP) {
-                        GameScene.this.moveUp();
-                    } else if (key.getCode() == KeyCode.LEFT) {
-                        GameScene.this.moveLeft();
-                    } else if (key.getCode() == KeyCode.RIGHT) {
-                        GameScene.this.moveRight();
+                    //Prevent other key from increasing the score
+	                if(key.getCode()==KeyCode.DOWN||key.getCode()==KeyCode.UP||key.getCode()==KeyCode.LEFT||key.getCode()==KeyCode.RIGHT)
+	                {
+	                    if (key.getCode() == KeyCode.DOWN) {
+	                        GameScene.this.moveDown();
+	                    } else if (key.getCode() == KeyCode.UP) {
+	                        GameScene.this.moveUp();
+	                    } else if (key.getCode() == KeyCode.LEFT) {
+	                        GameScene.this.moveLeft();
+	                    } else if (key.getCode() == KeyCode.RIGHT) {
+	                        GameScene.this.moveRight();
+	                    }
+	                    //GameScene.this.sumCellNumbersToScore();
+	                    scoreText.setText(score + "");
+	                    haveEmptyCell = GameScene.this.haveEmptyCell();
+	                    if (haveEmptyCell == -1) {
+	                        if (GameScene.this.canNotMove()) {
+	                            primaryStage.setScene(endGameScene);
+	
+	                            EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
+	                            root.getChildren().clear();
+	                            score = 0;
+	                        }
+	                    } else if(haveEmptyCell == 1)
+	                        GameScene.this.randomFillNumber(2);
                     }
-                    GameScene.this.sumCellNumbersToScore();
-                    scoreText.setText(score + "");
-                    haveEmptyCell = GameScene.this.haveEmptyCell();
-                    if (haveEmptyCell == -1) {
-                        if (GameScene.this.canNotMove()) {
-                            primaryStage.setScene(endGameScene);
-
-                            EndGame.getInstance().endGameShow(endGameScene, endGameRoot, primaryStage, score);
-                            root.getChildren().clear();
-                            score = 0;
-                        }
-                    } else if(haveEmptyCell == 1)
-                        GameScene.this.randomFillNumber(2);
                 });
             });
     }
