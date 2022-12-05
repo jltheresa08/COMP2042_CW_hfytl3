@@ -96,58 +96,92 @@ class GameScene {
     }
 
     private int passDestination(int i, int j, char direct) {
-        int coordinate = j;
-        if (direct == 'l') {
-            for (int k = j - 1; k >= 0; k--) {
-                if (cells[i][k].getNumber() != 0) {
-                    coordinate = k + 1;
-                    break;
-                } else if (k == 0) {
-                    coordinate = 0;
-                }
-            }
-            return coordinate;
-        }
-        coordinate = j;
-        if (direct == 'r') {
-            for (int k = j + 1; k <= n - 1; k++) {
-                if (cells[i][k].getNumber() != 0) {
-                    coordinate = k - 1;
-                    break;
-                } else if (k == n - 1) {
-                    coordinate = n - 1;
-                }
-            }
-            return coordinate;
-        }
-        coordinate = i;
-        if (direct == 'd') {
-            for (int k = i + 1; k <= n - 1; k++) {
-                if (cells[k][j].getNumber() != 0) {
-                    coordinate = k - 1;
-                    break;
+    	int coordinate;
 
-                } else if (k == n - 1) {
-                    coordinate = n - 1;
-                }
-            }
-            return coordinate;
-        }
-        coordinate = i;
-        if (direct == 'u') {
-            for (int k = i - 1; k >= 0; k--) {
-                if (cells[k][j].getNumber() != 0) {
-                    coordinate = k + 1;
-                    break;
-                } else if (k == 0) {
-                    coordinate = 0;
-                }
-            }
-            return coordinate;
-        }
-        return -1;
+    	if(direct == 'l'||direct =='r')
+    	{
+    		coordinate = j;
+			return getCoordinate(direct,i,j,coordinate);
+    	}
+    	else if(direct == 'd'|| direct == 'u')
+    	{
+    		coordinate = i;
+			return getCoordinate(direct,i,j,coordinate);
+			
+    	}
+    	else
+    	{
+    		return -1;
+    	}
+    		
+    	
+   
     }
+    
+    private int getCoordinate(char direct, int i, int j, int coordinate) {
+   
+    	int k,x;
+    	
+    	if (direct == 'l' || direct == 'u')
+    	{
 
+    		if(direct == 'l') 
+    			k = j - 1;
+    		else
+    			k = i - 1;
+    			
+    		
+    		for (; k >= 0; k--) 
+    		{
+    			
+    			if(direct == 'l')
+    				x = cells[i][k].getNumber();
+    			else
+    				x = cells[k][j].getNumber();
+    			
+                if (x != 0) 
+                {
+                    coordinate = k + 1;
+                    break;
+                } 
+                else if (k == 0) 
+                {
+                    coordinate = 0;
+                }
+            }
+
+    	}
+    	else if (direct == 'r'|| direct == 'd') 
+    	{
+    		
+    		if(direct == 'r') 
+    			k = j + 1;
+    		else
+    			k = i + 1;
+
+    		
+            for (; k <= n - 1; k++)
+            {
+            	
+            	if(direct == 'r')
+    				x = cells[i][k].getNumber();
+    			else
+    				x = cells[k][j].getNumber();
+            	
+                if (x != 0)
+                {
+                    coordinate = k - 1;
+                    break;
+                } 
+                else if (k == n - 1) 
+                {
+                    coordinate = n - 1;
+                }
+            }
+    	}
+    	return coordinate;
+    }
+    
     private void moveLeft() {
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < n; j++) {
@@ -273,18 +307,6 @@ class GameScene {
         return true;
     }
 
-   /* private void sumCellNumbersToScore() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-            	if(combined==true) {
-            		System.out.println("Getmodify"+combined);
-            		score += cells[i][j].getNumber();
-            		System.out.println("Score:"+score);
-            	}
-            }
-        }
-    }
-*/
     void game(Scene gameScene, Group root, Stage primaryStage, Scene endGameScene, Group endGameRoot) {
         this.root = root;
         for (int i = 0; i < n; i++) {
@@ -313,6 +335,7 @@ class GameScene {
                 Platform.runLater(() -> {
                     int haveEmptyCell;
                     //Prevent other key from increasing the score
+                    //public GameControls controls = new GameControls();
 	                if(key.getCode()==KeyCode.DOWN||key.getCode()==KeyCode.UP||key.getCode()==KeyCode.LEFT||key.getCode()==KeyCode.RIGHT)
 	                {
 	                    if (key.getCode() == KeyCode.DOWN) {
