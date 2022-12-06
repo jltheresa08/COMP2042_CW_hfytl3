@@ -13,8 +13,10 @@ module com.example.demo {
 	requires transitive javafx.controls;
 	requires javafx.fxml;
 	requires transitive javafx.graphics;
+	requires junit;
 
 	opens com.game.start to javafx.fxml;
 	opens com.game.account to javafx.fxml;
+	opens com.game.end to javafx.fxml;
 
 }
