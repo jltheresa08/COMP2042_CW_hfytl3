@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.game.start.loadingController">
+   <children>
+      <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #40071b;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="54.0" prefHeight="169.0" prefWidth="512.0" text="JAVA 2048" textAlignment="CENTER" textFill="#c5818f" AnchorPane.bottomAnchor="205.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="68.0" AnchorPane.topAnchor="54.0">
+               <font>
+                  <Font name="Corbel Bold" size="92.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="loadingBar" layoutX="131.0" layoutY="242.0" prefHeight="27.0" prefWidth="385.0" progress="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
