@@ -1,14 +1,14 @@
 package com.game.start;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * 
  * @author Theresa Lim - modified
  */
-public class Controller implements Initializable {
+public class titleController {
 
 
     @FXML
@@ -60,6 +60,7 @@ public class Controller implements Initializable {
     	this.primaryStage.show();
 
     }
+    
     /**
      * This method loads the game scene.
      */
@@ -78,25 +79,30 @@ public class Controller implements Initializable {
          
     }
     
+    public void showScoreboard(ActionEvent event) throws IOException {
+    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		Parent root = FXMLLoader.load(getClass().getResource("/com/game/account/scoreboard.fxml"));
+		stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
+    }
     /**
      * This method changes the colour of background of game.
      */
     public void changeTheme() {
+    	
     	this.currentColour = themeColour.getValue();
     	
     	BackgroundFill background_fill = new BackgroundFill(currentColour, CornerRadii.EMPTY, Insets.EMPTY);
     	Background background = new Background(background_fill);
     	
     	gameBackground.setBackground(background);
-    	
-        
     }
     
     /**
      * This method initializes the values in choice box.
      */
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize() {
 
 		gameMode.getItems().addAll(mode);
 		gameMode.setValue("Default (4x4)");
