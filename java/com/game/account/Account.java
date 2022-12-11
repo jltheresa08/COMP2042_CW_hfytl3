@@ -243,6 +243,20 @@ public class Account implements Comparable<Account> {
     public void sortByScore() {
     	
     	Collections.sort(accounts);
+    	FileWriter fileWriter;
+		try {
+			fileWriter = new FileWriter(file);
+			for(Account account : accounts)
+	    	{
+				fileWriter.write(account.toString()+"\n");
+	    	}
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+    	
     }
     
     /**
