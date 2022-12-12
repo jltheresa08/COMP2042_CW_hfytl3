@@ -31,7 +31,12 @@ public class Account implements Comparable<Account> {
 	 * Check if player has saved score before.
 	 */  
     public static boolean newPlayer;
-
+    
+    /**
+     * Determine that high score has changed.
+     */
+    public static boolean newHighScore;
+    
     /**
      * This constructor saves player's user name and score.
      * 
@@ -55,32 +60,15 @@ public class Account implements Comparable<Account> {
     	this(accountController.name,accountController.score);
     	
     	setFileName(fileName);
-    	
-    	try 
-    	{
-			createFile(file);
-			//accounts.clear();
-			getUserList();
-		} 
-    	catch (IOException e) 
-    	{
-			
-			e.printStackTrace();
-		}
+    	createFile(file);
+		getUserList();
     	
         if(accountHaveBeenExist(userName)==null)
         {
         	account = makeNewAccount(userName);
         	newPlayer = true;
         	
-        	try 
-        	{
-				addUser(account);
-			}
-        	catch (IOException e)
-        	{
-				e.printStackTrace();
-			}
+        	addUser(account);
 
         }
         else 
@@ -88,27 +76,11 @@ public class Account implements Comparable<Account> {
         	account = accountHaveBeenExist(userName);
         	newPlayer = false;
         	
-        	try
-        	{
-				updateScore(account);
-			}
-        	catch (IOException e)
-        	{
-				e.printStackTrace();
-			}
+        	updateScore(account);
  
         }
         
-        try
-    	{
-        	//accounts.clear();
-			getUserList();
-		}
-    	catch (FileNotFoundException e)
-    	{
-			e.printStackTrace();
-		}
-        
+        getUserList();
         sortByScore();
     }
     
@@ -126,6 +98,7 @@ public class Account implements Comparable<Account> {
     
     /**
      * This method represents Account objects in String.
+     * 
      * @return Player's user name and score in string.
      */
     @Override
@@ -137,31 +110,47 @@ public class Account implements Comparable<Account> {
      * This method creates a file to store accounts.
      * 
      * @param file Name and type of file.
-     * @throws IOException if creation of file has error
      */
-    public void createFile(File file) throws IOException {
+    public void createFile(File file) {
 
-	    if (file.createNewFile())
+	    try 
 	    {
-	    	System.out.println("File created: " + file.getName());
-	    } 
-	    else
+			if (file.createNewFile())
+			{
+				System.out.println("File created: " + file.getName());
+			} 
+			else
+			{
+				System.out.println("File already exists.");
+			}
+		} 
+	    catch (IOException e)
 	    {
-	    	System.out.println("File already exists.");
-	    }
+			e.printStackTrace();
+		}
     }
     
     /**
      * This method saves an account into a text file.
+     * 
      * @param account Current player's account.
-     * @throws IOException If file not found.
      */
-    public void addUser(Account account) throws IOException {
+    public void addUser(Account account) {
     	
-    	FileWriter fileWriter = new FileWriter(file, true);
+    	FileWriter fileWriter;
     	
-    	fileWriter.write(account.toString()+"\n");
-        fileWriter.close();
+		try 
+		{
+			fileWriter = new FileWriter(file, true);
+			
+			fileWriter.write(account.toString()+"\n");
+	        fileWriter.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+    	
     }
     
     public long getScore() {
@@ -178,47 +167,61 @@ public class Account implements Comparable<Account> {
      * @param fileName Name of file to be created.
      */
     public void setFileName(String fileName) {
+    	
     	file = new File(fileName);
     	this.fileName = fileName;
     }
     
     /**
      * This method reads all previous account from file and adds into accounts ArrayList.
-     * 
-     * @throws FileNotFoundException If file to open isn't found.
      */
-    public void getUserList() throws FileNotFoundException {
+    public void getUserList() {
     	
     	accounts.clear();
     	String[] userNscore;
-		Scanner getUserList = new Scanner(file);
-		
-		while(getUserList.hasNextLine())
+		Scanner getUserList;
+		try 
 		{
-			String data = getUserList.nextLine();
-			userNscore = data.split(",");
-			accounts.add(new Account(userNscore[0],Long.parseLong(userNscore[1])));
+			getUserList = new Scanner(file);
+			while(getUserList.hasNextLine())
+			{
+				String data = getUserList.nextLine();
+				userNscore = data.split(",");
+				accounts.add(new Account(userNscore[0],Long.parseLong(userNscore[1])));
+			}
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
 		}
+		
     }
     
     /**
      * This method overwrites current score of account in file if a new high score is achieved.
      * 
      * @param account Current player's account.
-     * @throws IOException If file not found.
      */
-    public void updateScore(Account account) throws IOException {
+    public void updateScore(Account account) {
     	
     	Path path = Paths.get(fileName);
-        List<String> lines = Files.readAllLines(path);
-
-        if(compareScore(account))
-        {
-        	lines.set((accounts.indexOf(account)), (userName+","+score));
-        	Files.write(path, lines);
-        }
-        else
-        	System.out.println("No change");
+        List<String> lines;
+		try 
+		{
+			lines = Files.readAllLines(path);
+			
+			if(compareScore(account))
+	        {
+	        	lines.set((accounts.indexOf(account)), (userName+","+score));
+	        	Files.write(path, lines);
+	        }
+			
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+        
     }
     
     /**
@@ -227,14 +230,21 @@ public class Account implements Comparable<Account> {
      * @param account Current player's account.
      * @return True current score is higher, false if otherwise.
      */
-    public boolean compareScore(Account account){
+    public boolean compareScore(Account account) {
     	
     	long prevScore = account.getScore();
         
         if(score>prevScore)
+        {
+        	newHighScore = true;
         	return true;
+        }
         else
+        {
+        	newHighScore = false;
         	return false;
+        }
+        	
     }
 
     /**
@@ -246,16 +256,19 @@ public class Account implements Comparable<Account> {
     	FileWriter fileWriter;
 		try {
 			fileWriter = new FileWriter(file);
+			
 			for(Account account : accounts)
 	    	{
 				fileWriter.write(account.toString()+"\n");
 	    	}
+			
 			fileWriter.close();
-		} catch (IOException e) {
+			
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
-		
-		
     	
     }
     

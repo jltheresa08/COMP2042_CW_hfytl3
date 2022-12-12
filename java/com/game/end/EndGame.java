@@ -54,12 +54,12 @@ public class EndGame {
      * @param score Current score of player.
      */
     public void endGameShow(Scene endGameScene, Group root, Stage primaryStage,long score){
-    	
-    	
+  	
     	endgameController.currentScore=score;
     	accountController.score=score;
-    	
+    
     	Parent parentRoot;
+    	
 		try 
 		{
 			
@@ -74,8 +74,6 @@ public class EndGame {
 			e1.printStackTrace();
 		}
        
-    	
     }
-
 
 }

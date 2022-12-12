@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.game.start.Controller">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.game.start.titleController">
    <children>
       <AnchorPane fx:id="gameBackground" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #40071b;">
          <children>
@@ -23,7 +23,7 @@
                   <Font size="22.0" />
                </font>
             </Button>
-            <Button fx:id="scoreBtn" contentDisplay="CENTER" layoutX="209.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="181.0" style="-fx-background-color: #ffb7c5;" text="SCOREBOARD">
+            <Button fx:id="scoreBtn" contentDisplay="CENTER" layoutX="209.0" layoutY="300.0" mnemonicParsing="false" onAction="#showScoreboard" prefHeight="40.0" prefWidth="181.0" style="-fx-background-color: #ffb7c5;" text="SCOREBOARD">
                <font>
                   <Font size="22.0" />
                </font>

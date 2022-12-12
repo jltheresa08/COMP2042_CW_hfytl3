@@ -1,11 +1,8 @@
-package com.game.start;
-
+package com.game.front;
 
 import java.io.IOException;
 import java.net.URL;
-
 import java.util.ResourceBundle;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -64,13 +61,13 @@ public class loadingController implements Initializable{
 		/**
 		 * This method loads the title screen.
 		 * 
-		 * @param event
+		 * @param event from pane.
 		 * @throws IOException if file not found.
 		 */
 		public void loadTitle(ActionEvent event) throws IOException {
 			
 			Stage stage = (Stage) pane.getScene().getWindow();
-			Parent root = FXMLLoader.load(getClass().getResource("title.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/com/game/start/title.fxml"));
 			stage.setScene(new Scene(root));
 	        stage.setResizable(false);
 	        stage.show();

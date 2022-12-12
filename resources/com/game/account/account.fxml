@@ -31,12 +31,17 @@
                   <Image url="@../../../img/profile.png" />
                </image>
             </ImageView>
-            <Button fx:id="enterBtn" layoutX="255.0" layoutY="323.0" mnemonicParsing="false" onAction="#loginUser" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #ffb7c5;" text="ENTER" />
+            <Button fx:id="enterBtn" layoutX="193.0" layoutY="322.0" mnemonicParsing="false" onAction="#loginUser" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #ffb7c5;" text="ENTER" />
             <Label fx:id="userBest" layoutX="238.0" layoutY="249.0" textAlignment="CENTER" textFill="#fff000">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>
             </Label>
+            <Button fx:id="quitBtn" layoutX="322.0" layoutY="322.0" mnemonicParsing="false" onAction="#closeGame" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #ffb7c5;" text="QUIT" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="12.179104804992676" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

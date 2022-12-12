@@ -1,9 +1,7 @@
 package com.game.account;
 
 import java.util.Optional;
-
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -52,7 +50,7 @@ public class accountController{
 
     	Account currentUser = new Account();
 
-    	if(currentUser.compareScore(currentUser))
+    	if(Account.newHighScore)
     		userBest.setText("New personal best!");
     	else
     	{

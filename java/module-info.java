@@ -1,5 +1,5 @@
 /**
- * Defines the implementation of 2048 game in Java starting with
+ * Defines the implementation of 2048 game in Java starting with 
  * {@link com.game.start.Main}
  * 
  * @author Theresa Lim - modified

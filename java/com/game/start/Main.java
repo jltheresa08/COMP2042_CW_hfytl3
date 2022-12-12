@@ -1,7 +1,6 @@
 package com.game.start;
 
 import javafx.application.Application;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +17,7 @@ public class Main extends Application {
     static final int HEIGHT = 900;
     
 	/**
-	 * This method loads the title scene of the game.
+	 * This method loads the loading scene of the game.
 	 * 
 	 * @param primaryStage An object of class Stage constructed by the platform, as the container of title scene.
 	 * @throws Exception When file not found

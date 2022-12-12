@@ -1,16 +1,21 @@
 package com.game.start;
 
-
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/**
+ * This class creates the cells for the game.
+ * 
+ * @author Theresa Lim - modified
+ */
 public class Cell {
     private Rectangle rectangle;
     private Group root;
     private Text textClass;
     private boolean modify = false;
+
 
     void setModify(boolean modify) {
         this.modify = modify;
@@ -20,6 +25,14 @@ public class Cell {
         return modify;
     }
 
+    /**
+     * This constructor draws the rectangles for the cells in game.
+     *  
+     * @param x position of rectangle on horizontal pane.
+     * @param y position of rectangle on vertical pane.
+     * @param scale size of cells.
+     * @param root Group of components to be displayed on game scene.
+     */
     Cell(double x, double y, double scale, Group root) {
         rectangle = new Rectangle();
         rectangle.setX(x);
@@ -36,6 +49,11 @@ public class Cell {
         this.textClass = textClass;
     }
 
+    /**
+     * This method changes the cell to another different cell.
+     * 
+     * @param cell Current cell.
+     */
     void changeCell(Cell cell) {
         TextMaker.changeTwoText(textClass, cell.getTextClass());
         root.getChildren().remove(cell.getTextClass());
@@ -51,15 +69,24 @@ public class Cell {
         cell.setColorByNumber(cell.getNumber());
     }
 
+    /**
+     * This method adds the value of two same value cells.
+     * 
+     * @param cell Current cell.
+     */
     void adder(Cell cell) {
         cell.getTextClass().setText((cell.getNumber() + this.getNumber()) + "");
         textClass.setText("0");
         root.getChildren().remove(textClass);
         cell.setColorByNumber(cell.getNumber());
         setColorByNumber(getNumber());
-        System.out.println("In cell class, adder");
     }
 
+    /**
+     * This method set the colour of cells according to their values.
+     * 
+     * @param number The value of the cell.
+     */
     void setColorByNumber(int number) {
         switch (number) {
             case 0:
@@ -111,8 +138,12 @@ public class Cell {
         return rectangle.getY();
     }
 
+    /**
+     * This method returns cell value.
+     * 
+     * @return cell value as integer.
+     */
     int getNumber() {
-    	//System.out.println(textClass.getText());
         return Integer.parseInt(textClass.getText());
         
     }
