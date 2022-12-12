@@ -11,7 +11,7 @@ git clone https://github.com/jltheresa08/COMP2042_CW_hfytl3.git
 ```
 
 ## Documentation
-Javadocs generated for this project can be found at: \COMP2042_CW_hfytl3-master\COMP2042_CW_hfytl3-master\javadoc
+Javadocs generated for this project can be found at: javadoc folder.
 
 ## Functional Features
 1. **Loading screen :**
