@@ -1,5 +1,5 @@
 # COMP2042_CW_hfytl3
-<p align = "center"><img src="https://2.bp.blogspot.com/-q90ZiNns-uo/W23zvqkJrMI/AAAAAAAADt8/FepWnFUxmC8dB8ehodct_akE_-WS2VpfQCLcBGAs/s1600/JavaFX_Logo.png"></p>
+<p align = "center"><img src="https://2.bp.blogspot.com/-q90ZiNns-uo/W23zvqkJrMI/AAAAAAAADt8/FepWnFUxmC8dB8ehodct_akE_-WS2VpfQCLcBGAs/s1600/JavaFX_Logo.png" width = 300></p>
 Name: Theresa Lim Jiyi
 ID: 20300517
 
