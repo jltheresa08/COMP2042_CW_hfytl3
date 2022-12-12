@@ -1,4 +1,5 @@
 # COMP2042_CW_hfytl3
+<p align = "center"><img src="https://2.bp.blogspot.com/-q90ZiNns-uo/W23zvqkJrMI/AAAAAAAADt8/FepWnFUxmC8dB8ehodct_akE_-WS2VpfQCLcBGAs/s1600/JavaFX_Logo.png"></p>
 Name: Theresa Lim Jiyi
 ID: 20300517
 
@@ -9,6 +10,7 @@ ID: 20300517
 ```
 git clone https://github.com/jltheresa08/COMP2042_CW_hfytl3.git
 ```
+3. Set up JavaFX in Eclipse by following [these steps](https://www.cs.umd.edu/eclipse/javafx/).
 
 ## Documentation
 Javadocs generated for this project can be found at: javadoc folder.
