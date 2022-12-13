@@ -70,8 +70,6 @@ public class scoreboardController {
    
     /**
      * This method retrieves all accounts saved in file.
-     * 
-     * @throws FileNotFoundException
      */
     public void getDataFromFile() {
     	
