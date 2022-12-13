@@ -1,7 +1,6 @@
 package com.game.account;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -115,14 +114,7 @@ public class Account implements Comparable<Account> {
 
 	    try 
 	    {
-			if (file.createNewFile())
-			{
-				System.out.println("File created: " + file.getName());
-			} 
-			else
-			{
-				System.out.println("File already exists.");
-			}
+			file.createNewFile();
 		} 
 	    catch (IOException e)
 	    {

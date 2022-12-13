@@ -1,24 +1,15 @@
 package com.game.end;
 
 import java.io.IOException;
-import java.util.Optional;
 
-import com.game.account.accountController;
-
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import com.game.account.accountController;
+
 
 /**
  * This class loads the Game Over scene.

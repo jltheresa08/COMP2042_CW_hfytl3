@@ -1,9 +1,9 @@
 package com.game.account;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -1,5 +1,7 @@
 package com.game.start;
 
+import java.util.Random;
+
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,7 +10,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.util.Random;
 
 import com.game.end.EndGame;
 

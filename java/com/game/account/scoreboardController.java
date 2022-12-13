@@ -73,16 +73,36 @@ public class scoreboardController {
      * 
      * @throws FileNotFoundException
      */
-    public void getDataFromFile() throws FileNotFoundException {
+    public void getDataFromFile() {
+    	
     	String[] userNscore;
-		Scanner getUserList = new Scanner(new File("accounts.txt"));
+		Scanner getUserList;
+		
 		tableview.getColumns().clear();
-		while(getUserList.hasNextLine())
+		
+		try 
 		{
-			String data = getUserList.nextLine();
-			userNscore = data.split(",");
-			tableview.getItems().add(new Account(userNscore[0],Long.parseLong(userNscore[1])));
+			File file = new File("accounts.txt");
+			
+			if(file.exists() && !file.isDirectory()) 
+			{ 
+				getUserList = new Scanner(file);
+				
+				
+				while(getUserList.hasNextLine())
+				{
+					String data = getUserList.nextLine();
+					userNscore = data.split(",");
+					tableview.getItems().add(new Account(userNscore[0],Long.parseLong(userNscore[1])));
+				}
+			}
+
+		} 
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
 		}
+		
 		
     }
 
