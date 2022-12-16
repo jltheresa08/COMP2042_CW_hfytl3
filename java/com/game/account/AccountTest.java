@@ -15,6 +15,9 @@ import org.junit.Test;
  */
 public class AccountTest {
 
+	/**
+	 * Test data for test units.
+	 */
 	static Account testAccount = new Account("testAcc", 1234);	
 	static Account checker;
 	
@@ -33,20 +36,27 @@ public class AccountTest {
 		testAccount.addUser(checker);
 	}
 	
-	
+	/**
+	 * Tests that account has not been saved before.
+	 */
 	@Test
 	public void accountHaveBeenExist_accountNotExist_returnNull(){
 		
 		assertEquals(null, testAccount.accountHaveBeenExist("testNullAcc"));
 	}
 	
+	/**
+	 * Tests that account have been saved previously.
+	 */
 	@Test
 	public void accountHaveBeenExist_accountExist_returnAccount(){
 		
 		assertEquals(checker, testAccount.accountHaveBeenExist("testAcc"));
 	}
 	
-
+	/**
+	 * Tests that previous score saved is higher than current score.
+	 */
 	@Test
 	public void compareScore_prevScoreHigher_returnFalse() {
 
@@ -55,6 +65,11 @@ public class AccountTest {
 		
 	}
 	
+	/**
+	 * Tests that current score is higher than previously saved score.
+	 * 
+	 * @throws IOException if file not found
+	 */
 	@Test
 	public void updateScore_newScoreHigher_compareScoreReturnTrueUpdate() throws IOException {
 		

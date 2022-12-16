@@ -79,6 +79,12 @@ public class titleController {
          
     }
     
+    /**
+     * This method opens score board window.
+     * 
+     * @param event Runs on SCOREBOARD button click.
+     * @throws IOException if file not found
+     */
     public void showScoreboard(ActionEvent event) throws IOException {
     	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		Parent root = FXMLLoader.load(getClass().getResource("/com/game/account/scoreboard.fxml"));

@@ -57,7 +57,7 @@ public class scoreboardController {
     /**
      * This method saves data into the table.
      * 
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException if file not found
      */
     public void initialize() throws FileNotFoundException {
     	

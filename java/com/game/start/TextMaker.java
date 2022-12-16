@@ -13,6 +13,9 @@ import javafx.scene.text.Text;
 class TextMaker {
     private static TextMaker singleInstance = null;
 
+    /**
+     * Constructor for TextMaker class.
+     */
     private TextMaker() {
 
     }
