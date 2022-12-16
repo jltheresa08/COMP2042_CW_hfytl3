@@ -11,9 +11,11 @@ ID: 20300517
 git clone https://github.com/jltheresa08/COMP2042_CW_hfytl3.git
 ```
 3. Set up JavaFX in Eclipse by following [these steps](https://www.cs.umd.edu/eclipse/javafx/).
+Note that this project was built using jdk 17.0.2. If you face any issues, please install jdk 17.0.2 from this [link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 ## Documentation
 Javadocs generated for this project can be found at: javadoc folder.
+To generate javadoc yourself, please add javafx and junit to module path in VM options.
 
 ## Functional Features
 1. **Loading screen :**
