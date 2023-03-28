@@ -3,6 +3,9 @@
 Name: Theresa Lim Jiyi
 ID: 20300517
 
+
+This is my attempt at maintaining, improving and extending an existing 2048 Game Project as part of my second year module, Developing Maintainable Software.
+
 ## Getting Started
 ### How to run
 1. Install Git from [here](https://git-scm.com/downloads). Skip this step if already installed.
